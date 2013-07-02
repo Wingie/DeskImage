@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate>{
+    NSStatusItem * statusItem;
+}
+@property (weak) IBOutlet NSMenu *Menu;
 
-@property (assign) IBOutlet NSWindow *window;
+- (IBAction)clicked:(id)sender;
 
 @end

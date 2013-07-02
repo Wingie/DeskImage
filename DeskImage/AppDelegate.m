@@ -12,7 +12,18 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [statusItem setMenu:self.Menu];
+    [statusItem setTitle:@"*"];
+    [statusItem setHighlightMode:YES];
+    
+    
+}
+
+- (IBAction)clicked:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Hi there."];
+    [alert runModal];
 }
 
 @end
