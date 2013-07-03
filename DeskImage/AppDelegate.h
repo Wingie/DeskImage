@@ -11,10 +11,11 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
     NSStatusItem * statusItem;
     NSTimer* timer;
+    NSMenu *Menu;
 }
-@property (weak) IBOutlet NSMenu *Menu;
+//@property (weak) IBOutlet NSMenu *Menu;
 
 - (IBAction)clicked:(id)sender;
-
 - (IBAction)stop:(id)sender;
+- (void) show:(NSTimer*)timer;
 @end

@@ -7,13 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "DIMain.h"
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:self.Menu];
+    [statusItem setMenu:Menu];
     [statusItem setTitle:@"*"];
     [statusItem setHighlightMode:YES];
 
@@ -26,11 +27,12 @@
 }
 
 - (IBAction)clicked:(id)sender {
-    timer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                     target:self
-                                           selector:@selector(show:)
-                                   userInfo:nil
-                                    repeats:YES];
+//    timer = [NSTimer scheduledTimerWithTimeInterval:2.0
+//                                     target:self
+//                                           selector:@selector(show:)
+//                                   userInfo:nil
+//                                    repeats:YES];
+    [DIMain test];
 }
 
 - (IBAction)stop:(id)sender {
