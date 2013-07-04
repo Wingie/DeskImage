@@ -13,7 +13,6 @@
     NSTimer* timer;
     NSMenu *Menu;
 }
-//@property (weak) IBOutlet NSMenu *Menu;
 
 - (IBAction)clicked:(id)sender;
 - (IBAction)stop:(id)sender;

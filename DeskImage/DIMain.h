@@ -10,6 +10,9 @@
 
 @interface DIMain : NSObject
 
-+ (void) test;
 
++ (void) test;
++ (NSData *) ProcessImage:(NSString *)filePath;
++ (NSImage*) desktopAsImage;
++ (NSData *) PNGRepresentationOfImage:(NSImage *) image;
 @end
