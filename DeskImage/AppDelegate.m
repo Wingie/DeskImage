@@ -20,21 +20,16 @@
     [statusItem setTitle:@"*"];
     [statusItem setHighlightMode:YES];
     
-    NSString *outFilePath = @"/Users/wingstonsharon/Pictures/i.png";
+    outFilePath = @"/tmp/wall";
+    
 //    NSString *inFilePath = @"/Library/Desktop Pictures/Earth Horizon.jpg";
-    NSMutableString *folderFilePath =[NSMutableString stringWithCapacity:10];// @"/Library/Desktop Pictures";
+    folderFilePath =[NSMutableString stringWithCapacity:10];
     [folderFilePath appendString:@"/Library/Desktop Pictures/"];
-    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderFilePath error:nil];
-    NSInteger index = arc4random() % [directoryContent count];
-    NSString *inFilePath = [folderFilePath stringByAppendingString:[directoryContent objectAtIndex:index]];
-    
-    NSLog(@"%@",inFilePath);
-    
-    [[DIMain ProcessImage:inFilePath] writeToFile:outFilePath atomically:YES];
-}
+    directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderFilePath error:nil];
+    index = -1;
+    }
 
 - (void) show:(NSTimer*)timer{
-
     [DIMain test];
 }
 
@@ -44,6 +39,19 @@
 //                            selector:@selector(show:)
 //                            userInfo:nil
 //                            repeats:YES];
+    
+    if(index!=-1){
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%ld.png", self->outFilePath, (long)index] error:nil];
+    }
+    index = arc4random() % [directoryContent count];
+    NSString *inFilePath = [folderFilePath stringByAppendingString:[directoryContent objectAtIndex:index]];
+    
+    NSString *wallStr = [NSString stringWithFormat:@"%@%ld.png", self->outFilePath, (long)index];
+    
+    [[DIMain ProcessImage:inFilePath] writeToFile:wallStr atomically:YES];
+    [DIMain SetDeskImage:wallStr];
+    NSLog(@"%@",wallStr);
+
 }
 
 - (IBAction)stop:(id)sender {

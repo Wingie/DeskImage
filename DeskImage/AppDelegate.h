@@ -12,6 +12,10 @@
     NSStatusItem * statusItem;
     NSTimer* timer;
     NSMenu *Menu;
+    NSString *outFilePath;
+    NSInteger index;
+    NSMutableString *folderFilePath;
+    NSArray *directoryContent;
 }
 
 - (IBAction)clicked:(id)sender;

@@ -16,4 +16,5 @@
 + (NSImage*) desktopAsImage;
 + (NSData *) PNGRepresentationOfImage:(NSImage *) image;
 + (NSArray *) returnDate;
++(void) SetDeskImage :(NSString*)wallStr;
 @end

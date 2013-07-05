@@ -10,6 +10,7 @@
 
 @implementation DIMain
 
+
 + (NSArray *) returnDate{
     NSDate *myDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -19,6 +20,22 @@
     NSArray *listItems = [myDateString componentsSeparatedByString:@" "];
     
     return listItems;
+}
+
++(void) SetDeskImage :(NSString*)wallStr{
+        NSURL *image = [NSURL fileURLWithPath:wallStr];
+        NSWorkspace *sws = [NSWorkspace sharedWorkspace];
+        NSError *err = nil;
+        for (NSScreen *screen in [NSScreen screens]) {
+            NSDictionary *opt = [sws desktopImageOptionsForScreen:screen];
+            [sws setDesktopImageURL:image forScreen:screen options:opt error:&err];
+            if (err) {
+                NSLog(@"%@",[err localizedDescription]);
+            }else{
+                [[screen deviceDescription] objectForKey:@"NSScreenNumber"];
+            }
+        }
+    NSLog(@"%s","x");
 }
 
 + (NSData *) ProcessImage:(NSString *)filePath{
