@@ -14,7 +14,7 @@
 + (NSArray *) returnDate{
     NSDate *myDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEEE, dd MMMM HH:mm"];
+    [dateFormatter setDateFormat:@"EEEE, dd MMMM hh:mm"];
     NSString *myDateString = [dateFormatter stringFromDate:myDate];
     //NSLog(@"%@",myDateString);
     NSArray *listItems = [myDateString componentsSeparatedByString:@" "];
@@ -35,7 +35,7 @@
                 [[screen deviceDescription] objectForKey:@"NSScreenNumber"];
             }
         }
-    NSLog(@"%s","x");
+    
 }
 
 + (NSData *) ProcessImage:(NSString *)filePath{
@@ -43,13 +43,13 @@
     NSArray *date = [self returnDate];
     NSString *dateStr = [[date subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@" "];
     NSString *timeStr = [date objectAtIndex:3];
-    NSLog(@"#%f,%f",tempImage.size.height,tempImage.size.width);
+
     NSInteger rectPosition = tempImage.size.height/2;
     NSInteger rectWidth = tempImage.size.height/8;
     float textX = tempImage.size.width*(3.6f/5.0f);
-    float textY = tempImage.size.height*(2.0f/7.0f);
+    float textY = tempImage.size.height*(1.0f/7.0f);
     float textS = tempImage.size.height/20.0f;
-    NSLog(@"~%f,%f",textX,textY);
+
     [tempImage lockFocus];
     
     [[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
@@ -57,14 +57,14 @@
     NSRect myRect = NSMakeRect(0,rectPosition, tempImage.size.width,rectWidth);
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
     CGContextSetRGBFillColor (context, 0.23,0.23,0.23, .4);
-    CGContextFillRect (context, CGRectMake (myRect.origin.x, myRect.origin.y, myRect.size.width,myRect.size.height));
+//    CGContextFillRect (context, CGRectMake (myRect.origin.x, myRect.origin.y, myRect.size.width,myRect.size.height));
     // Then draw the time
     NSDictionary *attributes = @{ NSFontAttributeName : [NSFont fontWithName:@"Avenir" size:textS],
        NSForegroundColorAttributeName : NSColor.whiteColor};
     CGContextSetRGBFillColor (context, 0.53,0.23,0.23, 1.0);
 
     CGFloat myColorValues[] = {0, 0, 0, .9};
-    CGContextSetShadowWithColor (context, CGSizeMake(-2.0f, -2.0f), 5,CGColorCreate(CGColorSpaceCreateDeviceRGB(),myColorValues));
+    CGContextSetShadowWithColor (context, CGSizeMake(-2.0f, -2.0f), 15,CGColorCreate(CGColorSpaceCreateDeviceRGB(),myColorValues));
     [dateStr drawAtPoint:NSMakePoint(textX,textY) withAttributes:attributes];
     [timeStr drawAtPoint:NSMakePoint(textX,textY+textS+textS/5) withAttributes:attributes];
     

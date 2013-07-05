@@ -14,11 +14,12 @@
     NSMenu *Menu;
     NSString *outFilePath;
     NSInteger index;
-    NSMutableString *folderFilePath;
+    NSString *folderFilePath;
     NSArray *directoryContent;
 }
 
 - (IBAction)clicked:(id)sender;
 - (IBAction)stop:(id)sender;
 - (void) show:(NSTimer*)timer;
+
 @end

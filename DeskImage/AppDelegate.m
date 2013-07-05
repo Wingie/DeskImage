@@ -11,7 +11,6 @@
 #include <stdlib.h>
 @implementation AppDelegate
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 //    NSURL *imageURL;
@@ -23,11 +22,11 @@
     outFilePath = @"/tmp/wall";
     
 //    NSString *inFilePath = @"/Library/Desktop Pictures/Earth Horizon.jpg";
-    folderFilePath =[NSMutableString stringWithCapacity:10];
-    [folderFilePath appendString:@"/Library/Desktop Pictures/"];
+    folderFilePath = @"/Library/Desktop Pictures/";
     directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderFilePath error:nil];
     index = -1;
-    }
+    
+}
 
 - (void) show:(NSTimer*)timer{
     [DIMain test];
@@ -53,6 +52,7 @@
     NSLog(@"%@",wallStr);
 
 }
+
 
 - (IBAction)stop:(id)sender {
 //    [timer invalidate];
