@@ -10,15 +10,44 @@
 
 @implementation DIMain
 
++ (NSArray *) returnDate{
+    NSDate *myDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE, dd MMMM HH:mm"];
+    NSString *myDateString = [dateFormatter stringFromDate:myDate];
+    //NSLog(@"%@",myDateString);
+    NSArray *listItems = [myDateString componentsSeparatedByString:@" "];
+    
+    return listItems;
+}
+
 + (NSData *) ProcessImage:(NSString *)filePath{
     NSImage *tempImage = [[NSImage alloc] initWithContentsOfFile:filePath];
+    NSArray *date = [self returnDate];
+    NSString *dateStr = [[date subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@" "];
+    NSString *timeStr = [date objectAtIndex:3];
+    NSInteger rectPosition = 420;
+    NSInteger rectWidth = 220;
+    NSInteger textX = 820;
+    NSInteger textY = 150;
     [tempImage lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
     
-    NSRect myRect = NSMakeRect(0,420, tempImage.size.width, 220);
+    [[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
+    // First Draw a translucent rectangle
+    NSRect myRect = NSMakeRect(0,rectPosition, tempImage.size.width,rectWidth);
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
     CGContextSetRGBFillColor (context, 0.23,0.23,0.23, .4);
     CGContextFillRect (context, CGRectMake (myRect.origin.x, myRect.origin.y, myRect.size.width,myRect.size.height));
+    // Then draw the time
+    NSDictionary *attributes = @{ NSFontAttributeName : [NSFont fontWithName:@"Avenir" size:90.0],
+       NSForegroundColorAttributeName : NSColor.whiteColor};
+    CGContextSetRGBFillColor (context, 0.53,0.23,0.23, 1.0);
+
+    CGFloat myColorValues[] = {0, 0, 0, .9};
+    CGContextSetShadowWithColor (context, CGSizeMake(-2.0f, -2.0f), 5,CGColorCreate(CGColorSpaceCreateDeviceRGB(),myColorValues));
+    [dateStr drawAtPoint:NSMakePoint(textX,textY) withAttributes:attributes];
+    [timeStr drawAtPoint:NSMakePoint(textX,textY+100) withAttributes:attributes];
+    
     [tempImage unlockFocus];
     return [DIMain PNGRepresentationOfImage:tempImage];
 }

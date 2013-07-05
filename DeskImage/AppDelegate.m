@@ -24,14 +24,11 @@
     NSString *inFilePath = @"/Users/wingstonsharon/Pictures/pic.png";
     
     [[DIMain ProcessImage:inFilePath] writeToFile:outFilePath atomically:YES];
-    NSLog(@"c");
-
+    
 }
 
 - (void) show:(NSTimer*)timer{
-//    NSAlert *alert = [[NSAlert alloc] init];
-//    [alert setMessageText:@"Hi there."];
-//    [alert runModal];
+
     [DIMain test];
 }
 

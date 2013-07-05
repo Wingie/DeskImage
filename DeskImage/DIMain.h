@@ -15,4 +15,5 @@
 + (NSData *) ProcessImage:(NSString *)filePath;
 + (NSImage*) desktopAsImage;
 + (NSData *) PNGRepresentationOfImage:(NSImage *) image;
++ (NSArray *) returnDate;
 @end
