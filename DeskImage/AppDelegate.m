@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DIMain.h"
-
+#include <stdlib.h>
 @implementation AppDelegate
 
 
@@ -21,10 +21,16 @@
     [statusItem setHighlightMode:YES];
     
     NSString *outFilePath = @"/Users/wingstonsharon/Pictures/i.png";
-    NSString *inFilePath = @"/Users/wingstonsharon/Pictures/pic.png";
+//    NSString *inFilePath = @"/Library/Desktop Pictures/Earth Horizon.jpg";
+    NSMutableString *folderFilePath =[NSMutableString stringWithCapacity:10];// @"/Library/Desktop Pictures";
+    [folderFilePath appendString:@"/Library/Desktop Pictures/"];
+    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderFilePath error:nil];
+    NSInteger index = arc4random() % [directoryContent count];
+    NSString *inFilePath = [folderFilePath stringByAppendingString:[directoryContent objectAtIndex:index]];
+    
+    NSLog(@"%@",inFilePath);
     
     [[DIMain ProcessImage:inFilePath] writeToFile:outFilePath atomically:YES];
-    
 }
 
 - (void) show:(NSTimer*)timer{
